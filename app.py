@@ -3,6 +3,7 @@ from flask_jwt_extended import JWTManager
 from flask_restful import Api
 from config import Config
 from resources.naver import ChineseResource
+from resources.news import NewsSearchResource
 # 로그아웃 관련된 import문
 # from resources.user import jwt_blocklist
 
@@ -23,6 +24,7 @@ jwt = JWTManager(app)
 api = Api(app)
 
 api.add_resource(ChineseResource, "/chinese")
+api.add_resource(NewsSearchResource, "/news")
 
 if __name__ == "__main__" :
     app.run()

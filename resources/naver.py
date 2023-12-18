@@ -21,12 +21,13 @@ class ChineseResource(Resource) :
         req_header = {"X-Naver-Client-Id" : Config.NAVER_CLIENT_ID,
                       "X-Naver-Client-Secret" : Config.NAVER_CLIENT_SECRET}
 
-        response = requests.post(url="https://openapi.naver.com/v1/papago/n2mt",
-                    data=req_data, headers=req_header)
+        response = requests.post("https://openapi.naver.com/v1/papago/n2mt",
+                    req_data, headers=req_header)
         
-        # 데이터를 받아왔으니 필요한 부분만 뽑아낸다.
+        # 받아온 데이터는 json 형식이 아니니 json 형식으로 바꿔준다.
         response = response.json()
-        
+
+        # 필요한 부분만 뽑아낸다.
         chinese = response["message"]["result"]["translatedText"]
 
         return {"result" : "success", "chinese" : chinese}, 200
